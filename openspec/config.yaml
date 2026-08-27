@@ -1,0 +1,63 @@
+schema: spec-driven
+
+context: |
+  Product:
+  - This repository is Yashraj Jaiswal's personal portfolio. It will present owner-verified experience, projects, preferred technologies, writing, and recommendations, and give visitors a clear way to make contact.
+  - The application is currently an early scaffold. Treat placeholder screens and sample Better-T-Stack behavior as implementation starting points, not settled product requirements.
+  - Public claims, links, dates, metrics, testimonials, recommendations, and media must come from owner-approved evidence. Development fixtures must be unmistakably non-production and must not be publishable as real portfolio content.
+  - When adapting a reference experience, preserve only independently implemented layout and interaction ideas. Do not copy another person's identity, prose, branding, imagery, logo, source code, or personal claims.
+
+  Architecture and ownership:
+  - This is a Bun 1.4, Nx, strict TypeScript, ES-module monorepo. Use Bun commands and workspace dependencies; do not introduce a second package manager.
+  - apps/web is the runnable full-stack product. It uses React 19, TanStack Start and Router, TanStack Query and Form, Vite 8, Nitro SSR, Tailwind CSS 4, and the React Compiler.
+  - packages/ui owns reusable shadcn/ui primitives, hooks, and global design tokens. Its shadcn style is base-mira with Phosphor icons; global styles live in packages/ui/src/styles/globals.css. Keep page-specific sections and compositions in apps/web.
+  - packages/api owns oRPC procedures and business logic; packages/auth owns Better Auth configuration; packages/db owns Drizzle/PostgreSQL schemas and database access; packages/env owns Zod-validated server and VITE_-prefixed client environment variables; packages/config owns shared TypeScript configuration.
+  - Prefer the @portfolio/* workspace aliases and the @/* web-app alias over long relative imports. TanStack's generated route tree is generated output and must not be edited manually.
+  - Route loaders and server functions should orchestrate server data through typed oRPC contracts. Enforce authorization at the server procedure/domain boundary, not only in the UI.
+  - evlog is integrated at the Nitro request/error boundary. Use structured events for operational failures and typed audit events for security-sensitive state changes; never log secrets, credentials, session tokens, or private contact content.
+
+  Engineering conventions:
+  - Follow AGENTS.md and Ultracite: accessible semantic React, explicit and narrow TypeScript types, top-level hooks, stable iterable keys, early returns, awaited promises, and no production console.log, debugger, alert, eval, or unsafe HTML.
+  - Reuse shared UI primitives before adding new ones. Keep design tokens centralized, preserve responsive and keyboard behavior, and include loading, empty, error, and reduced-motion states where relevant.
+  - Validate all external input at a trust boundary. Keep server-only data out of client bundles and expose only the minimum public fields required by a page.
+  - Database changes require a Drizzle schema change and a reviewed migration path. Avoid destructive migrations without an explicit data-preservation or rollback plan.
+  - Relevant repository checks are bun run check, bun run check-types, and bun run build. Add focused automated tests when a change introduces behavior that can regress; do not claim a test passed unless the command was actually run.
+
+rules:
+  proposal:
+    - State the user or product problem, intended outcome, scope, and explicit non-goals; do not turn the proposal into an implementation document.
+    - Identify affected capabilities and packages, external dependencies, and ordering dependencies on other OpenSpec changes.
+    - Call out owner input, content evidence, migrations, authentication, privacy, security, accessibility, SEO, or deployment impact when applicable.
+    - Prefer a small dependency-ordered change over a cross-cutting mega-change; separate reusable foundation, content infrastructure, public experiences, and launch hardening when they can be reviewed independently.
+    - Never present invented portfolio content or development fixtures as facts about the owner.
+  specs:
+    - Write normative requirements with SHALL or MUST and give every requirement at least one GIVEN/WHEN/THEN scenario.
+    - Specify observable behavior, including loading, empty, error, unauthorized, responsive, keyboard, and reduced-motion cases when relevant.
+    - "Define publication and data-exposure rules explicitly: public readers receive only intended, published, non-deleted, owner-verified fields."
+    - Keep requirements implementation-agnostic except where a repository boundary, security constraint, or existing platform contract is itself required behavior.
+    - For reference-inspired behavior, describe the observable interaction and responsive outcome without importing the reference's protected identity, content, assets, or code.
+  design:
+    - Map each responsibility to apps/web or the owning @portfolio package and describe end-to-end data flow across route, oRPC, auth, database, and UI boundaries.
+    - Record alternatives and tradeoffs for consequential choices, plus migration, rollback, privacy, security, observability, performance, and accessibility considerations where applicable.
+    - Distinguish shared primitives and tokens from app-specific compositions; avoid duplicating components already owned by packages/ui.
+    - Define content provenance and fixture-to-production replacement gates for any public portfolio data introduced by the change.
+    - Include open questions only when they materially block implementation, and name the evidence or decision needed to resolve each one.
+  tasks:
+    - Use ordered markdown checkboxes grouped into focused implementation phases, with dependencies appearing before their consumers.
+    - Make each task concrete and verifiable; name the expected package, route, schema, migration, contract, component, or test when known.
+    - Include focused tests and the relevant bun run check, bun run check-types, bun run build, migration, and OpenSpec validation steps.
+    - Include explicit owner-content replacement and publication-readiness tasks whenever fixtures or unverified content are used.
+    - Do not combine unrelated packages or several independently verifiable outcomes into one checkbox.
+
+operations:
+  apply:
+    guidance:
+      - Read proposal.md, specs, design.md, and tasks.md before editing, then implement only the selected change and preserve unrelated working-tree changes.
+      - Respect package ownership and typed boundaries; keep authentication, validation, privacy, structured logging, accessibility, and responsive behavior consistent with the artifacts.
+      - Complete and check off tasks only after their outcome is present. Run the most focused verification first, then the applicable repository checks and strict OpenSpec validation.
+      - Never replace missing owner evidence with plausible personal claims. Use clearly labeled development fixtures only when the artifacts allow them and keep publication gates closed.
+  archive:
+    guidance:
+      - Archive only after every required task is complete, implementation matches the delta specs, migrations and deployment notes are accounted for, and strict validation passes.
+      - Reconcile delta specs with the main specs, preserve durable decisions, and report any intentionally deferred work or owner-evidence gate.
+      - Record the exact verification performed; do not infer production readiness from a local build alone.
