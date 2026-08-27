@@ -26,7 +26,7 @@
     "better-auth": "catalog:",
     "dotenv": "catalog:",
     "evlog": "^2.22.4",
-    "lucide-react": "catalog:",
+    "@phosphor-icons/react": "catalog:",
     "next-themes": "catalog:",
     "nitro": "^3.0.260610-beta",
     "react": "catalog:",
@@ -36,7 +36,9 @@
     "zod": "catalog:"
   },
   "devDependencies": {
+    "@babel/core": "^8.0.1",
     "@portfolio/config": "workspace:*",
+    "@rolldown/plugin-babel": "^0.2.3",
     "@tanstack/react-query-devtools": "^5.101.4",
     "@tanstack/react-router-devtools": "^1.167.0",
     "@testing-library/dom": "^10.4.1",
@@ -44,6 +46,7 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "^6.0.4",
+    "babel-plugin-react-compiler": "^1.0.0",
     "jsdom": "^30.0.0",
     "typescript": "catalog:",
     "vite": "^8.1.5",

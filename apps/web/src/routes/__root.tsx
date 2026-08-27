@@ -1,4 +1,5 @@
 import { Toaster } from "@portfolio/ui/components/sonner";
+import { TooltipProvider } from "@portfolio/ui/components/tooltip";
 import type { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
@@ -10,15 +11,14 @@ import {
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { createMiddleware } from "@tanstack/react-start";
 import { evlogErrorHandler } from "evlog/nitro/v3";
-
-import type { orpc } from "@/utils/orpc";
-
+import type { orpcClient, queryUtils } from "@/utils/orpc";
 import Header from "../components/header";
 
 import appCss from "../index.css?url";
 export interface RouterAppContext {
-	orpc: typeof orpc;
+	orpcClient: typeof orpcClient;
 	queryClient: QueryClient;
+	queryUtils: typeof queryUtils;
 }
 
 export const Route = createRootRouteWithContext<RouterAppContext>()({
@@ -55,10 +55,12 @@ function RootDocument() {
 				<HeadContent />
 			</head>
 			<body>
-				<div className="grid h-svh grid-rows-[auto_1fr]">
-					<Header />
-					<Outlet />
-				</div>
+				<TooltipProvider>
+					<div className="grid h-svh grid-rows-[auto_1fr]">
+						<Header />
+						<Outlet />
+					</div>
+				</TooltipProvider>
 				<Toaster richColors />
 				<TanStackRouterDevtools position="bottom-left" />
 				<ReactQueryDevtools buttonPosition="bottom-right" position="bottom" />

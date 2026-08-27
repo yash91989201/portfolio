@@ -8,7 +8,6 @@
   "files": {
     "ignoreUnknown": false,
     "includes": [
-      "**",
       "!**/.next",
       "!**/dist",
       "!**/.turbo",
@@ -43,7 +42,7 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
       "correctness": {
         "useExhaustiveDependencies": "info"
       },
@@ -56,7 +55,13 @@
           }
         }
       },
+      "performance": {
+        "noJsxPropsBind": "off",
+        "noBarrelFile": "off"
+      },
       "style": {
+        "useBlockStatements": "off",
+        "useConsistentTypeDefinitions": "off",
         "noParameterAssign": "error",
         "useAsConstAssertion": "error",
         "useDefaultParameterLast": "error",
@@ -80,5 +85,9 @@
       "tailwindDirectives": true
     }
   },
-  "extends": ["ultracite/biome/core", "ultracite/biome/react", "ultracite/biome/tanstack"]
+  "extends": [
+    "ultracite/biome/core",
+    "ultracite/biome/react",
+    "ultracite/biome/tanstack"
+  ]
 }
