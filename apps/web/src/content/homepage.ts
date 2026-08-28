@@ -39,11 +39,11 @@ export const profile: Profile = {
 		open: true,
 	},
 	bioSegments: [
-		"Building ",
-		{ accent: "performant web applications" },
-		" with a focus on developer experience and clean architecture. Passionate about ",
-		{ accent: "open-source tooling" },
-		" and type-safe systems.",
+		"I build ",
+		{ accent: "web products end to end" },
+		", from the interface and APIs to deployment. Most of my work is in TypeScript, React, TanStack, PostgreSQL, and Go, and I like keeping things ",
+		{ accent: "practical, fast, and easy to maintain" },
+		".",
 	],
 	email: "yashraj6370@gmail.com",
 	links: [

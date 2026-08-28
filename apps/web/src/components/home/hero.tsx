@@ -1,5 +1,6 @@
 import {
 	ArrowRightIcon,
+	DownloadSimpleIcon,
 	EnvelopeSimpleIcon,
 	GithubLogoIcon,
 	LinkedinLogoIcon,
@@ -68,8 +69,16 @@ export function Hero({ profile }: HeroProps) {
 					Get in touch
 					<ArrowRightIcon className="ml-1 size-3.5" />
 				</Link>
+				<a
+					className={buttonVariants({ size: "lg", variant: "secondary" })}
+					download="resume.pdf"
+					href="/assets/resume.pdf"
+				>
+					<DownloadSimpleIcon className="mr-1 size-4" />
+					Resume
+				</a>
 				<Link
-					className={buttonVariants({ size: "lg", variant: "outline" })}
+					className={buttonVariants({ size: "lg", variant: "ghost" })}
 					hash="projects"
 					to="."
 				>
