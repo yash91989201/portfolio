@@ -12,7 +12,6 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { createMiddleware } from "@tanstack/react-start";
 import { evlogErrorHandler } from "evlog/nitro/v3";
 import type { orpcClient, queryUtils } from "@/utils/orpc";
-import Header from "../components/header";
 
 import appCss from "../index.css?url";
 export interface RouterAppContext {
@@ -39,7 +38,8 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 				name: "viewport",
 			},
 			{
-				title: "My App",
+				title:
+					"yashraj-jaiswal.dev - Yashraj Jaiswal - Full Stack Developer & DevOps Engineer",
 			},
 		],
 	}),
@@ -56,10 +56,7 @@ function RootDocument() {
 			</head>
 			<body>
 				<TooltipProvider>
-					<div className="grid h-svh grid-rows-[auto_1fr]">
-						<Header />
-						<Outlet />
-					</div>
+					<Outlet />
 				</TooltipProvider>
 				<Toaster richColors />
 				<TanStackRouterDevtools position="bottom-left" />
