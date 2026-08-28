@@ -9,7 +9,8 @@ import {
 import { useFieldContext } from "./hooks";
 
 export type FormControlProps = {
-	label: string;
+	label: ReactNode;
+	labelClassName?: string;
 	description?: string;
 };
 
@@ -22,6 +23,7 @@ type FormBaseProps = FormControlProps & {
 export function FormBase({
 	children,
 	label,
+	labelClassName,
 	description,
 	controlFirst,
 	horizontal,
@@ -31,7 +33,9 @@ export function FormBase({
 
 	const labelElement = (
 		<>
-			<FieldLabel htmlFor={field.name}>{label}</FieldLabel>
+			<FieldLabel className={labelClassName} htmlFor={field.name}>
+				{label}
+			</FieldLabel>
 			{description ? <FieldDescription>{description}</FieldDescription> : null}
 		</>
 	);

@@ -7,11 +7,16 @@ type FormInputProps = React.ComponentProps<"input"> & FormControlProps;
 export function FormInput(props: FormInputProps) {
 	const field = useFieldContext<string>();
 	const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+	const { description, label, labelClassName, ...inputProps } = props;
 
 	return (
-		<FormBase {...props}>
+		<FormBase
+			description={description}
+			label={label}
+			labelClassName={labelClassName}
+		>
 			<Input
-				{...props}
+				{...inputProps}
 				aria-invalid={isInvalid}
 				id={field.name}
 				name={field.name}
