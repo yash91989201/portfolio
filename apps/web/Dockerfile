@@ -21,11 +21,13 @@ RUN apt-get update \
 COPY --from=builder /app /app
 
 ENV HOST=0.0.0.0
-ENV PORT=3001
+# Nitro's node-server defaults to 3000; the PORT env set by the image is not
+# reliably carried into Coolify's container launch, so the server listens on 3000.
+ENV PORT=3000
 # node:24-slim has no curl/wget by default; installed above for Coolify's probe
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-  CMD curl -fsS http://127.0.0.1:3001/ -o /dev/null
+  CMD curl -fsS http://127.0.0.1:3000/ -o /dev/null
 
-# SSR chunks require workspace dependencies at runtime
+EXPOSE 3000
 WORKDIR /app/apps/web
 CMD ["node", ".output/server/index.mjs"]
