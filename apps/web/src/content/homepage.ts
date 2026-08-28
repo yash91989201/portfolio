@@ -45,7 +45,7 @@ export const profile: Profile = {
 		{ accent: "open-source tooling" },
 		" and type-safe systems.",
 	],
-	email: "hello@example.invalid",
+	email: "yashraj6370@gmail.com",
 	links: [
 		{
 			href: "https://github.com/yash91989201",
