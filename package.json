@@ -1,6 +1,7 @@
 {
   "name": "portfolio",
   "private": true,
+  "type": "module",
   "workspaces": {
     "packages": [
       "apps/*",
@@ -27,26 +28,25 @@
       "@types/react-dom": "^19.2.5"
     }
   },
-  "type": "module",
   "scripts": {
-    "dev": "nx run-many -t dev",
     "build": "nx run-many -t build",
+    "check": "ultracite check",
     "check-types": "nx run-many -t check-types",
-    "dev:web": "nx run-many -t dev --projects=web",
-    "db:push": "nx run-many -t db:push --projects=@portfolio/db",
-    "db:studio": "nx run-many -t db:studio --projects=@portfolio/db",
+    "db:down": "docker compose down postgres",
     "db:generate": "nx run-many -t db:generate --projects=@portfolio/db",
     "db:migrate": "nx run-many -t db:migrate --projects=@portfolio/db",
+    "db:push": "nx run-many -t db:push --projects=@portfolio/db",
     "db:start": "docker compose up -d postgres",
-    "db:watch": "docker compose up postgres",
     "db:stop": "docker compose stop postgres",
-    "db:down": "docker compose down postgres",
+    "db:studio": "nx run-many -t db:studio --projects=@portfolio/db",
+    "db:watch": "docker compose up postgres",
+    "dev": "nx run-many -t dev",
+    "dev:type-generator": "bun scripts/type-generator.ts --watch",
+    "dev:web": "nx run-many -t dev --projects=web",
     "docker:build": "docker compose build",
-    "docker:up": "docker compose up -d --build",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",
-    "check": "ultracite check",
-    "dev:type-generator": "bun scripts/type-generator.ts --watch",
+    "docker:up": "docker compose up -d --build",
     "fix": "ultracite fix"
   },
   "dependencies": {
@@ -57,8 +57,8 @@
   "devDependencies": {
     "@biomejs/biome": "2.5.11",
     "@portfolio/config": "workspace:*",
-    "@types/node": "catalog:",
     "@types/bun": "catalog:",
+    "@types/node": "catalog:",
     "lefthook": "^2.1.10",
     "nx": "^23.1.2",
     "typescript": "catalog:",

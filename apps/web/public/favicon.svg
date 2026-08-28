@@ -1,18 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <linearGradient id="orbit" x1="12" y1="10" x2="53" y2="56" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#67e8f9" />
-      <stop offset="0.52" stop-color="#818cf8" />
-      <stop offset="1" stop-color="#c084fc" />
-    </linearGradient>
-    <linearGradient id="core" x1="22" y1="16" x2="43" y2="50" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#ffffff" />
-      <stop offset="1" stop-color="#bae6fd" />
-    </linearGradient>
-  </defs>
-  <rect width="64" height="64" rx="16" fill="#080b16" />
-  <path d="M14 18.5 26.2 35v14h11.6V35L50 18.5H39.4L32 28.9l-7.4-10.4H14Z" fill="url(#core)" />
-  <path d="M13 14.5C23.6 6.2 42 7.5 51.2 19.2M51 49.5C40.4 57.8 22 56.5 12.8 44.8" fill="none" stroke="url(#orbit)" stroke-linecap="round" stroke-width="3.5" />
-  <circle cx="52" cy="21" r="3.5" fill="#67e8f9" />
-  <circle cx="12" cy="43" r="3.5" fill="#c084fc" />
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<linearGradient
+			gradientUnits="userSpaceOnUse"
+			id="orbit"
+			x1="12"
+			x2="53"
+			y1="10"
+			y2="56"
+		>
+			<stop stop-color="#67e8f9" />
+			<stop offset="0.52" stop-color="#818cf8" />
+			<stop offset="1" stop-color="#c084fc" />
+		</linearGradient>
+		<linearGradient
+			gradientUnits="userSpaceOnUse"
+			id="core"
+			x1="22"
+			x2="43"
+			y1="16"
+			y2="50"
+		>
+			<stop stop-color="#ffffff" />
+			<stop offset="1" stop-color="#bae6fd" />
+		</linearGradient>
+	</defs>
+	<rect fill="#080b16" height="64" rx="16" width="64" />
+	<path
+		d="M14 18.5 26.2 35v14h11.6V35L50 18.5H39.4L32 28.9l-7.4-10.4H14Z"
+		fill="url(#core)"
+	/>
+	<path
+		d="M13 14.5C23.6 6.2 42 7.5 51.2 19.2M51 49.5C40.4 57.8 22 56.5 12.8 44.8"
+		fill="none"
+		stroke="url(#orbit)"
+		stroke-linecap="round"
+		stroke-width="3.5"
+	/>
+	<circle cx="52" cy="21" fill="#67e8f9" r="3.5" />
+	<circle cx="12" cy="43" fill="#c084fc" r="3.5" />
 </svg>

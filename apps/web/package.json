@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "serve": "vite preview",
-    "dev": "vite dev"
+    "dev": "vite dev",
+    "serve": "vite preview"
   },
   "dependencies": {
     "@orpc/client": "catalog:",
@@ -13,6 +13,7 @@
     "@orpc/server": "catalog:",
     "@orpc/tanstack-query": "^1.15.0",
     "@orpc/zod": "catalog:",
+    "@phosphor-icons/react": "catalog:",
     "@portfolio/api": "workspace:*",
     "@portfolio/auth": "workspace:*",
     "@portfolio/env": "workspace:*",
@@ -26,7 +27,6 @@
     "better-auth": "catalog:",
     "dotenv": "catalog:",
     "evlog": "^2.27.1",
-    "@phosphor-icons/react": "catalog:",
     "next-themes": "catalog:",
     "nitro": "^3.0.260610-beta",
     "react": "catalog:",
