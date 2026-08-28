@@ -56,9 +56,7 @@ export function Hero({ profile }: HeroProps) {
 				{profile.rolesLine}
 			</p>
 
-			<p className="max-w-lg font-sans text-muted-foreground text-sm leading-relaxed">
-				{bio}
-			</p>
+			<p className="max-w-lg font-sans leading-relaxed">{bio}</p>
 
 			<div className="flex flex-wrap items-center gap-3">
 				<Link className={buttonVariants({ size: "lg" })} hash="contact" to=".">
