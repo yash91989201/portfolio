@@ -39,7 +39,7 @@ export function Contact({ profile }: ContactProps) {
 	const form = useAppForm({
 		...contactFormOpts,
 		onSubmit: () => {
-			toast.success("Thanks! Your message passed validation.");
+			toast.success("TODO: implement contact form :)");
 			form.reset();
 		},
 		validators: {
@@ -56,7 +56,7 @@ export function Contact({ profile }: ContactProps) {
 			<div className="mx-auto max-w-6xl">
 				<div className="flex items-start justify-between">
 					<p className="font-mono text-muted-foreground text-xs uppercase tracking-widest">
-						<span className="text-primary">03</span> Get in touch
+						<span className="text-primary">04</span> Get in touch
 					</p>
 					<div className="text-right font-mono text-muted-foreground text-xs">
 						<p>~/contact</p>

@@ -1,12 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { GridPattern } from "../components/grid-pattern";
 import { Contact } from "../components/home/contact";
+import { Experience } from "../components/home/experience";
 import { Footer } from "../components/home/footer";
 import { Hero } from "../components/home/hero";
 import { Nav } from "../components/home/nav";
 import { Projects } from "../components/home/projects";
 import { TerminalWidget } from "../components/home/terminal-widget";
-import { profile, projects } from "../content/homepage";
+import { experiences, profile, projects } from "../content/homepage";
 
 export const Route = createFileRoute("/")({
 	component: HomeComponent,
@@ -43,6 +44,7 @@ function HomeComponent() {
 						</div>
 					</section>
 					<Projects projects={projects} />
+					<Experience experiences={experiences} />
 					<Contact profile={profile} />
 				</main>
 				<Footer profile={profile} />

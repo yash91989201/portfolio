@@ -103,3 +103,39 @@ export const projects: Project[] = [
 		year: "2026",
 	},
 ];
+
+export type Experience = {
+	index: number;
+	role: string;
+	company: string;
+	logo?: string;
+	period: string;
+	duration: string;
+	location: string;
+	skills: string[];
+	current?: boolean;
+};
+
+export const experiences: Experience[] = [
+	{
+		company: "WorkHolo",
+		current: true,
+		duration: "2 yrs 2 mos",
+		index: 1,
+		location: "Raj Nagar, Dwarka, New Delhi · Remote",
+		logo: "/assets/workholo-logo.webp",
+		period: "Jul 2024 – Present",
+		role: "Full Stack Engineer",
+		skills: ["IT Services", "Software Design"],
+	},
+	{
+		company: "FynTune Solution Private Limited",
+		duration: "1 yr 4 mos",
+		index: 2,
+		location: "Remote",
+		logo: "/assets/fyntune-logo.png",
+		period: "Dec 2022 – Mar 2024",
+		role: "Frontend Web Developer",
+		skills: ["Web Development", "Front-End Development"],
+	},
+];

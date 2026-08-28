@@ -9,6 +9,7 @@ type NavProps = {
 const anchors = [
 	{ hash: "home", label: "~/home", to: "." },
 	{ hash: "projects", label: "~/projects", to: "." },
+	{ hash: "experience", label: "~/experience", to: "." },
 	{ hash: "contact", label: "~/contact", to: "." },
 ] as const;
 
