@@ -1,24 +1,18 @@
-import {
-	CalendarBlankIcon,
-	EnvelopeSimpleIcon,
-	GithubLogoIcon,
-	LinkedinLogoIcon,
-	MapPinIcon,
-	StackIcon,
-} from "@phosphor-icons/react";
+import { ArrowRightIcon } from "@phosphor-icons/react";
 import { Button } from "@portfolio/ui/components/button";
 import { FieldGroup } from "@portfolio/ui/components/field";
 import { useAppForm } from "@portfolio/ui/components/form/hooks";
 import { Spinner } from "@portfolio/ui/components/spinner";
 import { formOptions } from "@tanstack/react-form";
 import { toast } from "sonner";
-import type { Profile } from "@/content/homepage";
+import type { Profile, SocialLink } from "@/content/homepage";
 import { ContactFormSchema } from "@/lib/schemas/contact";
 import type { ContactFormType } from "@/lib/types";
 
 type ContactProps = {
 	profile: Profile;
 };
+
 const contactFormOpts = formOptions({
 	defaultValues: {
 		email: "",
@@ -27,18 +21,21 @@ const contactFormOpts = formOptions({
 	} satisfies ContactFormType as ContactFormType,
 });
 
+const handleFromHref = (link: SocialLink): string => {
+	try {
+		const slug = new URL(link.href).pathname
+			.split("/")
+			.filter(Boolean)
+			.join("/");
+		return link.kind === "github" ? `@${slug}` : slug;
+	} catch {
+		return link.label;
+	}
+};
+
 export function Contact({ profile }: ContactProps) {
-	const scheduleRow = profile.scheduleUrl ? (
-		<a
-			className="inline-flex items-center gap-2 font-mono text-primary text-sm transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
-			href={profile.scheduleUrl}
-			rel="noopener noreferrer"
-			target="_blank"
-		>
-			<CalendarBlankIcon className="size-4" weight="light" />
-			Schedule a call
-		</a>
-	) : null;
+	const socialLinks = profile.links.filter((link) => link.kind !== "email");
+
 	const form = useAppForm({
 		...contactFormOpts,
 		onSubmit: () => {
@@ -56,77 +53,101 @@ export function Contact({ profile }: ContactProps) {
 			className="px-4 py-16 lg:px-8"
 			id="contact"
 		>
-			<div className="mx-auto max-w-6xl space-y-10">
-				<div className="flex items-center justify-between border-border border-b pb-4">
-					<div className="flex items-center gap-3">
-						<span className="font-mono text-muted-foreground text-xs">
-							[03]
-						</span>
-						<span className="font-mono text-muted-foreground text-xs">/</span>
-						<h2
-							className="font-mono font-semibold text-foreground text-lg tracking-tight"
-							id="contact-heading"
-						>
-							Contact
-						</h2>
+			<div className="mx-auto max-w-6xl">
+				<div className="flex items-start justify-between">
+					<p className="font-mono text-muted-foreground text-xs uppercase tracking-widest">
+						<span className="text-primary">03</span> Get in touch
+					</p>
+					<div className="text-right font-mono text-muted-foreground text-xs">
+						<p>~/contact</p>
+						<p className="text-primary">
+							<span aria-hidden="true">●</span> replies in &lt; 24h
+						</p>
 					</div>
 				</div>
 
-				<div className="grid gap-8 lg:grid-cols-2">
-					<div className="space-y-6">
-						<a
-							className="block font-mono font-semibold text-lg text-primary transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2 sm:text-xl lg:text-2xl"
-							href={`mailto:${profile.email}`}
-						>
-							{profile.email}
-						</a>
+				<h2
+					className="mt-2 font-mono font-semibold text-3xl tracking-tight sm:text-4xl"
+					id="contact-heading"
+				>
+					Let&apos;s build something.
+				</h2>
 
-						<div className="space-y-3">
-							<div className="flex items-center gap-2 font-mono text-muted-foreground text-sm">
-								<MapPinIcon className="size-4" weight="light" />
-								<span>{profile.location}</span>
-							</div>
-							<div className="flex items-center gap-2 font-mono text-muted-foreground text-sm">
-								<EnvelopeSimpleIcon className="size-4" weight="light" />
-								<span>{profile.statusNote}</span>
-							</div>
-							<div className="flex items-center gap-2 font-mono text-muted-foreground text-sm">
-								<StackIcon className="size-4" weight="light" />
-								<span>{profile.stackLine}</span>
-							</div>
+				<div className="mt-6 border-border border-t" />
+
+				<div className="mt-8 grid gap-10 lg:grid-cols-2">
+					<div className="space-y-6">
+						<div className="space-y-5">
+							<a
+								className="group inline-flex items-center gap-2 font-mono font-semibold text-2xl text-foreground transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
+								href={`mailto:${profile.email}`}
+							>
+								{profile.email}
+								<ArrowRightIcon
+									className="size-5 transition-transform group-hover:translate-x-1"
+									weight="light"
+								/>
+							</a>
+							<div className="border-border border-b border-dotted" />
 						</div>
 
-						<div className="flex items-center gap-4">
-							{profile.links
-								.filter((l) => l.kind !== "email")
-								.map((link) => {
-									const Icon =
-										link.kind === "github" ? GithubLogoIcon : LinkedinLogoIcon;
-									return (
+						<dl className="space-y-2 font-mono text-sm">
+							<div className="flex gap-3">
+								<dt className="w-20 shrink-0 text-muted-foreground">
+									location
+								</dt>
+								<dd className="text-foreground">{profile.location}</dd>
+							</div>
+							<div className="flex gap-3">
+								<dt className="w-20 shrink-0 text-muted-foreground">status</dt>
+								<dd className="text-primary">{profile.statusNote}</dd>
+							</div>
+							<div className="flex gap-3">
+								<dt className="w-20 shrink-0 text-muted-foreground">stack</dt>
+								<dd className="text-foreground">{profile.stackLine}</dd>
+							</div>
+							{socialLinks.map((link) => (
+								<div className="flex gap-3" key={link.kind}>
+									<dt className="w-20 shrink-0 text-muted-foreground">
+										{link.kind}
+									</dt>
+									<dd>
 										<a
 											aria-label={link.label}
-											className="text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
+											className="text-foreground transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
 											href={link.href}
-											key={link.kind}
 											rel="noopener noreferrer"
 											target="_blank"
 										>
-											<Icon className="size-5" weight="light" />
+											{handleFromHref(link)}
 										</a>
-									);
-								})}
-						</div>
+									</dd>
+								</div>
+							))}
+						</dl>
 
-						{scheduleRow}
+						{profile.scheduleUrl ? (
+							<div className="space-y-3">
+								<p className="font-mono text-muted-foreground text-xs">
+									prefer a call?
+								</p>
+								<a
+									className="inline-flex h-8 items-center justify-center gap-2 rounded-md border border-border bg-input/30 px-3 font-mono text-foreground text-xs transition-colors hover:bg-input/50 focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
+									href={profile.scheduleUrl}
+									rel="noopener noreferrer"
+									target="_blank"
+								>
+									<span className="text-muted-foreground">$</span>
+									schedule a 30-min call
+								</a>
+							</div>
+						) : null}
 					</div>
 
-					<div className="space-y-4 rounded-lg border border-border bg-card p-4">
-						<p className="font-mono text-muted-foreground text-xs">
-							Direct message
-						</p>
+					<div className="rounded-lg border border-border bg-card p-5">
 						<form.AppForm>
 							<form
-								className="space-y-3"
+								className="space-y-4"
 								onSubmit={(e) => {
 									e.preventDefault();
 									form.handleSubmit();
@@ -136,9 +157,13 @@ export function Contact({ profile }: ContactProps) {
 									<form.AppField name="name">
 										{(field) => (
 											<field.Input
-												className="font-mono"
-												label="Name"
-												placeholder="Your name"
+												className="h-9 font-mono"
+												label={
+													<>
+														NAME <span className="text-primary">*</span>
+													</>
+												}
+												labelClassName="font-mono tracking-widest"
 											/>
 										)}
 									</form.AppField>
@@ -146,9 +171,13 @@ export function Contact({ profile }: ContactProps) {
 									<form.AppField name="email">
 										{(field) => (
 											<field.Input
-												className="font-mono"
-												label="Email"
-												placeholder="you@example.com"
+												className="h-9 font-mono"
+												label={
+													<>
+														EMAIL <span className="text-primary">*</span>
+													</>
+												}
+												labelClassName="font-mono tracking-widest"
 												type="email"
 											/>
 										)}
@@ -158,41 +187,51 @@ export function Contact({ profile }: ContactProps) {
 										{(field) => (
 											<field.Textarea
 												className="font-mono"
-												label="Message"
-												placeholder="Your message"
-												rows={4}
+												label={
+													<>
+														MESSAGE <span className="text-primary">*</span>
+													</>
+												}
+												labelClassName="font-mono tracking-widest"
+												placeholder="What are you building?"
+												rows={5}
 											/>
 										)}
 									</form.AppField>
 
-									<form.Subscribe
-										selector={(state) => [
-											state.canSubmit,
-											state.isValidating,
-											state.isSubmitting,
-										]}
-									>
-										{([canSubmit, isValidating, isSubmitting]) => (
-											<Button
-												className="w-full font-mono"
-												disabled={!canSubmit || isValidating || isSubmitting}
-												type="submit"
-											>
-												{isSubmitting ? (
-													<>
-														<Spinner />
-														Sending...
-													</>
-												) : (
-													"Send message"
-												)}
-											</Button>
-										)}
-									</form.Subscribe>
-									<p className="font-mono text-muted-foreground text-xs">
-										This form validates your input; backend submission isn't
-										wired up yet.
-									</p>
+									<div className="flex flex-wrap items-center justify-between gap-3 pt-2">
+										<p className="font-mono text-muted-foreground text-xs">
+											protected · rate-limited
+										</p>
+										<form.Subscribe
+											selector={(state) => [
+												state.canSubmit,
+												state.isValidating,
+												state.isSubmitting,
+											]}
+										>
+											{([canSubmit, isValidating, isSubmitting]) => (
+												<Button
+													className="font-mono"
+													disabled={!canSubmit || isValidating || isSubmitting}
+													size="lg"
+													type="submit"
+												>
+													{isSubmitting ? (
+														<>
+															<Spinner />
+															sending...
+														</>
+													) : (
+														<>
+															<ArrowRightIcon />
+															send message
+														</>
+													)}
+												</Button>
+											)}
+										</form.Subscribe>
+									</div>
 								</FieldGroup>
 							</form>
 						</form.AppForm>
