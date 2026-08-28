@@ -5,8 +5,9 @@ import {
 	LinkedinLogoIcon,
 } from "@phosphor-icons/react";
 import { Badge } from "@portfolio/ui/components/badge";
-import type { Profile } from "@/content/homepage";
+import { buttonVariants } from "@portfolio/ui/components/button";
 import { Link } from "@tanstack/react-router";
+import type { Profile } from "@/content/homepage";
 import { cn } from "@/lib/utils";
 
 type HeroProps = {
@@ -60,16 +61,12 @@ export function Hero({ profile }: HeroProps) {
 			</p>
 
 			<div className="flex flex-wrap items-center gap-3">
-				<Link
-					className="inline-flex h-7 items-center justify-center gap-1 rounded-md border border-transparent bg-primary px-2 font-medium font-mono text-primary-foreground text-xs transition-colors hover:bg-primary/80 focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
-					hash="contact"
-					to="."
-				>
+				<Link className={buttonVariants({ size: "lg" })} hash="contact" to=".">
 					Get in touch
 					<ArrowRightIcon className="ml-1 size-3.5" />
 				</Link>
 				<Link
-					className="inline-flex h-7 items-center justify-center gap-1 rounded-md border border-border bg-input/30 px-2 font-medium font-mono text-foreground text-xs transition-colors hover:bg-input/50 focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
+					className={buttonVariants({ size: "lg", variant: "outline" })}
 					hash="projects"
 					to="."
 				>
@@ -88,7 +85,9 @@ export function Hero({ profile }: HeroProps) {
 							aria-label={link.label}
 							href={link.href}
 							key={link.kind}
-							{...(isExternal ? { rel: "noopener noreferrer", target: "_blank" } : {})}
+							{...(isExternal
+								? { rel: "noopener noreferrer", target: "_blank" }
+								: {})}
 							className="text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
 						>
 							<Icon className="size-5" weight="light" />
