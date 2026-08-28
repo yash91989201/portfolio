@@ -116,5 +116,65 @@
 		oklch(1 0 0 / 5%) 1px,
 		transparent 1px
 	);
-	background-size: 24px 24px;
+	background-size: 1.5rem 1.5rem;
+}
+
+.grid-pattern-layer {
+	position: absolute;
+	inset: 0;
+}
+
+.grid-pattern-guides {
+	background-image:
+		linear-gradient(to right, oklch(1 0 0 / 2.5%) 1px, transparent 1px),
+		linear-gradient(to bottom, oklch(1 0 0 / 2.5%) 1px, transparent 1px);
+	background-position: -1px -1px;
+	background-size: 6rem 6rem;
+}
+
+.grid-pattern-dots {
+	background-image: radial-gradient(
+		circle,
+		oklch(1 0 0 / 8%) 1px,
+		transparent 1.4px
+	);
+	background-size: 1.5rem 1.5rem;
+}
+
+.grid-pattern-torch {
+	background-image: radial-gradient(
+		circle,
+		var(--primary) 1.4px,
+		transparent 1.8px
+	);
+	background-size: 1.5rem 1.5rem;
+	opacity: 0.95;
+	-webkit-mask-image: radial-gradient(
+		circle 13.75rem at var(--grid-pointer-x, 50vw) var(--grid-pointer-y, 50vh),
+		black 0%,
+		oklch(0 0 0 / 65%) 35%,
+		transparent 75%
+	);
+	mask-image: radial-gradient(
+		circle 13.75rem at var(--grid-pointer-x, 50vw) var(--grid-pointer-y, 50vh),
+		black 0%,
+		oklch(0 0 0 / 65%) 35%,
+		transparent 75%
+	);
+	transition: opacity 250ms ease;
+}
+
+.grid-pattern-vignette {
+	background: radial-gradient(
+		ellipse at top,
+		transparent 0%,
+		var(--background) 75%
+	);
+	opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.grid-pattern-torch {
+		display: none;
+	}
 }

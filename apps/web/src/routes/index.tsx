@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { GridPattern } from "../components/grid-pattern";
 import { Contact } from "../components/home/contact";
 import { Footer } from "../components/home/footer";
 import { Hero } from "../components/home/hero";
@@ -23,26 +24,29 @@ export const Route = createFileRoute("/")({
 
 function HomeComponent() {
 	return (
-		<div className="bg-dot-grid">
-			<Nav profile={profile} />
-			<main id="main">
-				<section
-					aria-labelledby="home-heading"
-					className="px-4 pt-16 lg:px-8"
-					id="home"
-				>
-					<div className="mx-auto flex max-w-6xl flex-col gap-8 lg:flex-row lg:items-center lg:gap-16">
-						<div className="sr-only" id="home-heading">
-							Hero
+		<div className="relative isolate overflow-x-clip">
+			<GridPattern />
+			<div className="relative z-10">
+				<Nav profile={profile} />
+				<main id="main">
+					<section
+						aria-labelledby="home-heading"
+						className="px-4 pt-16 lg:px-8"
+						id="home"
+					>
+						<div className="mx-auto flex max-w-6xl flex-col gap-8 lg:flex-row lg:items-center lg:gap-16">
+							<div className="sr-only" id="home-heading">
+								Hero
+							</div>
+							<Hero profile={profile} />
+							<TerminalWidget />
 						</div>
-						<Hero profile={profile} />
-						<TerminalWidget />
-					</div>
-				</section>
-				<Projects projects={projects} />
-				<Contact profile={profile} />
-			</main>
-			<Footer profile={profile} />
+					</section>
+					<Projects projects={projects} />
+					<Contact profile={profile} />
+				</main>
+				<Footer profile={profile} />
+			</div>
 		</div>
 	);
 }
