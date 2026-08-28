@@ -25,6 +25,11 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 	head: () => ({
 		links: [
 			{
+				href: "/favicon-terminal.png",
+				rel: "icon",
+				type: "image/png",
+			},
+			{
 				href: appCss,
 				rel: "stylesheet",
 			},
