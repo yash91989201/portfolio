@@ -6,6 +6,7 @@ import {
 } from "@phosphor-icons/react";
 import { Badge } from "@portfolio/ui/components/badge";
 import { buttonVariants } from "@portfolio/ui/components/button";
+import { Typewriter } from "@portfolio/ui/components/typewriter";
 import { Link } from "@tanstack/react-router";
 import type { Profile } from "@/content/homepage";
 import { cn } from "@/lib/utils";
@@ -45,10 +46,14 @@ export function Hero({ profile }: HeroProps) {
 			<h1 className="font-bold font-mono text-2xl tracking-tight sm:text-3xl lg:text-5xl">
 				<span className="text-muted-foreground">$</span> hi, I'm
 				<br />
-				<span className="text-primary">{profile.name}</span>
-				<span
-					aria-hidden="true"
-					className="ml-0.5 inline-block h-[1.1em] w-[0.55em] translate-y-[0.05em] animate-blink bg-primary"
+				<Typewriter
+					className="text-primary"
+					cursorBlinkDuration={1}
+					loop={false}
+					phrases={[profile.name]}
+					startDelay={300}
+					trigger="mount"
+					typeSpeed={80}
 				/>
 			</h1>
 
