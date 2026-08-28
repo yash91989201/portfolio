@@ -57,7 +57,8 @@
       },
       "performance": {
         "noJsxPropsBind": "off",
-        "noBarrelFile": "off"
+        "noBarrelFile": "off",
+        "noNamespaceImport": "off"
       },
       "style": {
         "useBlockStatements": "off",
