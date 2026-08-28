@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
 import { ArrowUpRightIcon } from "@phosphor-icons/react";
+import { Link } from "@tanstack/react-router";
 import type { Project } from "@/content/homepage";
 
 type ProjectsProps = {
@@ -18,7 +18,7 @@ export function Projects({ projects }: ProjectsProps) {
 			<div className="mx-auto max-w-6xl">
 				<div className="flex items-start justify-between">
 					<p className="font-mono text-muted-foreground text-xs uppercase tracking-widest">
-						<span className="text-primary">[02]</span> Featured work
+						<span className="text-primary">02</span> Featured work
 					</p>
 					<div className="text-right font-mono text-muted-foreground text-xs">
 						<p>~/projects/featured</p>
