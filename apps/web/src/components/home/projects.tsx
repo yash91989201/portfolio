@@ -40,7 +40,7 @@ export function Projects({ projects }: ProjectsProps) {
 				<div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 					{featured.map((project) => (
 						<article
-							className="group flex flex-col rounded-lg border border-border bg-card/50 p-5 transition-colors hover:border-primary/30"
+							className="group relative flex flex-col overflow-hidden rounded-lg border border-border bg-card/50 p-5 transition-[border-color,transform] duration-200 after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:bg-[radial-gradient(circle_at_100%_0%,color-mix(in_oklab,var(--primary)_15%,transparent),transparent_60%)] after:opacity-0 after:transition-opacity after:duration-250 after:content-[''] hover:-translate-y-0.5 hover:border-primary hover:after:opacity-100"
 							key={project.index}
 						>
 							<span className="font-mono text-primary text-xs">
