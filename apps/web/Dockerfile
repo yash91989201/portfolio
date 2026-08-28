@@ -1,4 +1,4 @@
-FROM oven/bun:1 AS builder
+FROM oven/bun:1.4.0 AS builder
 WORKDIR /app
 ENV SKIP_ENV_VALIDATION=1
 # the build evaluates the auth config; the real secret comes from compose at runtime
