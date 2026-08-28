@@ -14,14 +14,17 @@ ENV BETTER_AUTH_SECRET=
 
 FROM node:24-slim AS runner
 WORKDIR /app
-ENV NODE_ENV=production
+# Coolify's health probe requires curl/wget in the image
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends curl \
+  && rm -rf /var/lib/apt/lists/*
 COPY --from=builder /app /app
 
 ENV HOST=0.0.0.0
 ENV PORT=3001
-# node:24-slim ships no curl/wget; Node 24 has global fetch, so probe via node.
+# node:24-slim has no curl/wget by default; installed above for Coolify's probe
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-  CMD node -e "fetch('http://127.0.0.1:3001/').then(r=>process.exit(r.status<500?0:1)).catch(()=>process.exit(1))"
+  CMD curl -fsS http://127.0.0.1:3001/ -o /dev/null
 
 # SSR chunks require workspace dependencies at runtime
 WORKDIR /app/apps/web
