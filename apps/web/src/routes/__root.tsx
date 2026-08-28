@@ -12,8 +12,8 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { createMiddleware } from "@tanstack/react-start";
 import { evlogErrorHandler } from "evlog/nitro/v3";
 import type { orpcClient, queryUtils } from "@/utils/orpc";
-
 import appCss from "../index.css?url";
+
 export interface RouterAppContext {
 	orpcClient: typeof orpcClient;
 	queryClient: QueryClient;
@@ -38,8 +38,7 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 				name: "viewport",
 			},
 			{
-				title:
-					"yashraj-jaiswal.dev - Yashraj Jaiswal - Full Stack Developer & DevOps Engineer",
+				title: "Yashraj Jaiswal - Full Stack Developer & DevOps Engineer",
 			},
 		],
 	}),

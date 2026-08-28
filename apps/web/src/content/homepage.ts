@@ -48,26 +48,26 @@ export const profile: Profile = {
 	email: "hello@example.invalid",
 	links: [
 		{
-			href: "https://github.com/example",
+			href: "https://github.com/yash91989201",
 			kind: "github",
-			label: "GitHub profile (sample)",
+			label: "GitHub profile",
 		},
 		{
-			href: "https://linkedin.com/in/example",
+			href: "https://www.linkedin.com/in/yashraj-jaiswal-91989201s/",
 			kind: "linkedin",
-			label: "LinkedIn profile (sample)",
+			label: "LinkedIn profile",
 		},
 		{
-			href: "mailto:hello@example.invalid",
+			href: "mailto:yashraj6370@gmail.com",
 			kind: "email",
-			label: "Send email (sample)",
+			label: "Send email",
 		},
 	],
-	location: "[Sample] India",
+	location: "Joda Basti Odisha India",
 	name: "Yashraj",
 	promptName: "Yash",
-	rolesLine: "Full-Stack Developer · TypeScript · React · Node.js",
-	stackLine: "TypeScript · React · Next.js · Node.js · PostgreSQL · Docker",
+	rolesLine: "Full-Stack Developer | DevOps Engineer | India - Remote",
+	stackLine: "Ts / NextJS / Tanstack / Postgres / GoLang",
 	statusNote: "Currently open to freelance and collaboration",
 };
 
@@ -100,15 +100,6 @@ export const projects: Project[] = [
 		liveUrl: "https://github.com/vivek-workholo/workholo",
 		role: "Contributor",
 		title: "Workholo",
-		year: "2026",
-	},
-	{
-		description:
-			"A documented workflow for developing a consistent fictional AI creator identity, from face prototypes and canonical references through LoRA training, image generation, and video production.",
-		featured: true,
-		index: 4,
-		role: "Creator",
-		title: "AI Influencer Workflow",
 		year: "2026",
 	},
 ];
