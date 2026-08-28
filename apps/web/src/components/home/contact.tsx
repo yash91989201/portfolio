@@ -7,14 +7,25 @@ import {
 	StackIcon,
 } from "@phosphor-icons/react";
 import { Button } from "@portfolio/ui/components/button";
-import { Input } from "@portfolio/ui/components/input";
-import { Label } from "@portfolio/ui/components/label";
-import { Textarea } from "@portfolio/ui/components/textarea";
+import { FieldGroup } from "@portfolio/ui/components/field";
+import { useAppForm } from "@portfolio/ui/components/form/hooks";
+import { Spinner } from "@portfolio/ui/components/spinner";
+import { formOptions } from "@tanstack/react-form";
+import { toast } from "sonner";
 import type { Profile } from "@/content/homepage";
+import { ContactFormSchema } from "@/lib/schemas/contact";
+import type { ContactFormType } from "@/lib/types";
 
 type ContactProps = {
 	profile: Profile;
 };
+const contactFormOpts = formOptions({
+	defaultValues: {
+		email: "",
+		message: "",
+		name: "",
+	} satisfies ContactFormType as ContactFormType,
+});
 
 export function Contact({ profile }: ContactProps) {
 	const scheduleRow = profile.scheduleUrl ? (
@@ -28,6 +39,16 @@ export function Contact({ profile }: ContactProps) {
 			Schedule a call
 		</a>
 	) : null;
+	const form = useAppForm({
+		...contactFormOpts,
+		onSubmit: () => {
+			toast.success("Thanks! Your message passed validation.");
+			form.reset();
+		},
+		validators: {
+			onSubmit: ContactFormSchema,
+		},
+	});
 
 	return (
 		<section
@@ -103,47 +124,78 @@ export function Contact({ profile }: ContactProps) {
 						<p className="font-mono text-muted-foreground text-xs">
 							Direct message
 						</p>
-						<form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
-							<div className="space-y-1.5">
-								<Label className="font-mono" htmlFor="contact-name">
-									Name
-								</Label>
-								<Input
-									className="font-mono"
-									id="contact-name"
-									placeholder="Your name"
-								/>
-							</div>
-							<div className="space-y-1.5">
-								<Label className="font-mono" htmlFor="contact-email">
-									Email
-								</Label>
-								<Input
-									className="font-mono"
-									id="contact-email"
-									placeholder="you@example.com"
-									type="email"
-								/>
-							</div>
-							<div className="space-y-1.5">
-								<Label className="font-mono" htmlFor="contact-message">
-									Message
-								</Label>
-								<Textarea
-									className="font-mono"
-									id="contact-message"
-									placeholder="Your message"
-									rows={4}
-								/>
-							</div>
-							<Button className="w-full font-mono" disabled type="submit">
-								Coming soon
-							</Button>
-							<p className="font-mono text-muted-foreground text-xs">
-								Contact form is under construction. Use the email above to reach
-								out.
-							</p>
-						</form>
+						<form.AppForm>
+							<form
+								className="space-y-3"
+								onSubmit={(e) => {
+									e.preventDefault();
+									form.handleSubmit();
+								}}
+							>
+								<FieldGroup>
+									<form.AppField name="name">
+										{(field) => (
+											<field.Input
+												className="font-mono"
+												label="Name"
+												placeholder="Your name"
+											/>
+										)}
+									</form.AppField>
+
+									<form.AppField name="email">
+										{(field) => (
+											<field.Input
+												className="font-mono"
+												label="Email"
+												placeholder="you@example.com"
+												type="email"
+											/>
+										)}
+									</form.AppField>
+
+									<form.AppField name="message">
+										{(field) => (
+											<field.Textarea
+												className="font-mono"
+												label="Message"
+												placeholder="Your message"
+												rows={4}
+											/>
+										)}
+									</form.AppField>
+
+									<form.Subscribe
+										selector={(state) => [
+											state.canSubmit,
+											state.isValidating,
+											state.isSubmitting,
+										]}
+									>
+										{([canSubmit, isValidating, isSubmitting]) => (
+											<Button
+												className="w-full font-mono"
+												disabled={!canSubmit || isValidating || isSubmitting}
+												type="submit"
+											>
+												{isSubmitting ? (
+													<>
+														<Spinner />
+														Sending...
+													</>
+												) : (
+													"Send message"
+												)}
+											</Button>
+										)}
+									</form.Subscribe>
+									<p className="font-mono text-muted-foreground text-xs">
+										This form validates your input; backend submission isn't
+										wired up yet.
+									</p>
+								</FieldGroup>
+							</form>
+						</form.AppForm>
 					</div>
 				</div>
 			</div>
