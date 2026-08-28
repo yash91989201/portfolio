@@ -20,12 +20,12 @@
     "@portfolio/env": "workspace:*",
     "dotenv": "catalog:",
     "drizzle-orm": "^0.45.2",
-    "pg": "^8.22.0",
+    "pg": "^8.23.0",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@portfolio/config": "workspace:*",
-    "@types/pg": "^8.20.0",
+    "@types/pg": "^8.23.1",
     "drizzle-kit": "^0.31.10",
     "typescript": "catalog:"
   }

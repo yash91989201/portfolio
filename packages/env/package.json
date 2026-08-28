@@ -14,7 +14,8 @@
   },
   "devDependencies": {
     "@portfolio/config": "workspace:*",
-    "@types/node": "catalog:",
-    "typescript": "catalog:"
+    "@types/bun": "catalog:",
+    "typescript": "catalog:",
+    "vite": "^8.2.2"
   }
 }
