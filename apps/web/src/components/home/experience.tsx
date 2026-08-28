@@ -1,6 +1,15 @@
+import { Badge } from "@portfolio/ui/components/badge";
+import {
+	Item,
+	ItemContent,
+	ItemDescription,
+	ItemFooter,
+	ItemGroup,
+	ItemHeader,
+	ItemMedia,
+	ItemTitle,
+} from "@portfolio/ui/components/item";
 import type { Experience as ExperienceEntry } from "@/content/homepage";
-
-import { cn } from "@/lib/utils";
 
 type ExperienceProps = {
 	experiences: ExperienceEntry[];
@@ -38,16 +47,10 @@ export function Experience({ experiences }: ExperienceProps) {
 
 				<div className="mt-6 border-border border-t" />
 
-				<div className="mt-8">
-					{experiences.map((experience, i) => (
-						<article
-							className={cn(
-								"flex gap-4 py-6 sm:gap-6",
-								i > 0 && "border-border border-t border-dashed"
-							)}
-							key={experience.index}
-						>
-							<div className="flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-md border border-border bg-card/50 p-1.5">
+				<ItemGroup className="mt-8">
+					{experiences.map((experience) => (
+						<Item key={experience.index} render={<article />}>
+							<ItemMedia className="size-11 overflow-hidden rounded-md border border-border bg-card/50 p-1.5">
 								{experience.logo ? (
 									<img
 										alt=""
@@ -65,32 +68,40 @@ export function Experience({ experiences }: ExperienceProps) {
 										{companyInitial(experience.company)}
 									</span>
 								)}
-							</div>
+							</ItemMedia>
 
-							<div className="min-w-0 flex-1">
-								<div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-									<h3 className="font-mono font-semibold text-foreground text-lg leading-snug">
+							<ItemContent className="gap-1.5">
+								<ItemHeader>
+									<ItemTitle className="line-clamp-none font-mono font-semibold text-base sm:text-lg">
 										{experience.role}
-									</h3>
+									</ItemTitle>
 									{experience.current ? (
-										<span className="inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-2 py-0.5 font-mono text-[10px] text-primary uppercase tracking-widest">
-											<span className="size-1.5 rounded-full bg-primary" />
+										<Badge
+											className="border-primary/40 bg-primary/10 font-mono text-primary uppercase tracking-widest"
+											variant="outline"
+										>
+											<span
+												aria-hidden="true"
+												className="size-1.5 rounded-full bg-primary"
+											/>
 											current
-										</span>
+										</Badge>
 									) : null}
-								</div>
+								</ItemHeader>
 
-								<p className="mt-1 font-mono text-muted-foreground text-sm">
+								<ItemDescription className="font-mono">
 									<span className="text-foreground">{experience.company}</span>{" "}
 									· Full-time
-								</p>
+								</ItemDescription>
 
-								<p className="mt-1 font-mono text-muted-foreground text-xs">
+								<ItemDescription className="font-mono">
 									{experience.period} · {experience.duration} ·{" "}
 									{experience.location}
-								</p>
+								</ItemDescription>
+							</ItemContent>
 
-								<ul className="mt-3 flex flex-wrap gap-2">
+							<ItemFooter className="flex-wrap gap-2">
+								<ul className="flex flex-wrap gap-2">
 									{experience.skills.map((skill) => (
 										<li
 											className="rounded-full border border-border bg-card/50 px-2.5 py-0.5 font-mono text-muted-foreground text-xs"
@@ -100,10 +111,10 @@ export function Experience({ experiences }: ExperienceProps) {
 										</li>
 									))}
 								</ul>
-							</div>
-						</article>
+							</ItemFooter>
+						</Item>
 					))}
-				</div>
+				</ItemGroup>
 
 				<div className="mt-6 flex items-center border-border border-t border-dashed pt-5">
 					<p className="font-mono text-muted-foreground text-xs">
