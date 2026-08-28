@@ -79,14 +79,11 @@ export function Contact({ profile }: ContactProps) {
 					<div className="space-y-6">
 						<div className="space-y-5">
 							<a
-								className="group inline-flex items-center gap-2 font-mono font-semibold text-2xl text-foreground transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
+								className="group inline-flex items-center gap-2 font-mono font-semibold text-2xl text-foreground decoration-dotted transition-colors hover:text-primary hover:underline hover:underline-offset-8 focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2"
 								href={`mailto:${profile.email}`}
 							>
 								{profile.email}
-								<ArrowRightIcon
-									className="size-5 transition-transform group-hover:translate-x-1"
-									weight="light"
-								/>
+								<ArrowRightIcon className="size-5" weight="light" />
 							</a>
 							<div className="border-border border-b border-dotted" />
 						</div>
