@@ -71,7 +71,7 @@ export function Hero({ profile }: HeroProps) {
 				</Link>
 				<a
 					className={buttonVariants({ size: "lg", variant: "secondary" })}
-					download="resume.pdf"
+					download="Yashraj Jaiswal Resume - Fullstack.pdf"
 					href="/assets/resume.pdf"
 				>
 					<DownloadSimpleIcon className="mr-1 size-4" />
